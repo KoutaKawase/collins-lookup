@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Collins Quick Lookup</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      margin: 0;
+      padding: 12px;
+      width: 280px;
+      font: 14px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    form { display: flex; gap: 8px; }
+    input {
+      flex: 1;
+      min-width: 0;
+      padding: 7px 10px;
+      font: inherit;
+      border: 1px solid #9ca3af;
+      border-radius: 6px;
+    }
+    input:focus-visible { outline: 2px solid #2563eb; outline-offset: 1px; }
+    button {
+      padding: 7px 14px;
+      font: inherit;
+      color: #fff;
+      background: #b91c1c;
+      border: 0;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover { background: #991b1b; }
+    button:focus-visible { outline: 2px solid #2563eb; outline-offset: 2px; }
+  </style>
+</head>
+<body>
+  <form id="form">
+    <input id="word" type="text" placeholder="Enter a word" autocomplete="off" spellcheck="false" autofocus>
+    <button type="submit">Search</button>
+  </form>
+  <script src="dist/popup.js"></script>
+</body>
+</html>

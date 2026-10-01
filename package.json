@@ -1,0 +1,10 @@
+{
+  "name": "collins-lookup",
+  "private": true,
+  "scripts": {
+    "build": "bun build src/*.ts --outdir dist --target browser"
+  },
+  "devDependencies": {
+    "@types/chrome": "latest"
+  }
+}
