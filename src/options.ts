@@ -58,8 +58,28 @@ $<HTMLButtonElement>("reset").addEventListener("click", async () => {
   showStatus("初期値に戻しました。");
 });
 
-$<HTMLButtonElement>("open-shortcuts").addEventListener("click", () => {
-  chrome.tabs.create({ url: "chrome://extensions/shortcuts" });
+$<HTMLButtonElement>("open-shortcuts").addEventListener("click", async () => {
+  // Firefox 137+: 専用 API でショートカット設定を開く
+  const firefox = (
+    globalThis as { browser?: { commands?: { openShortcutSettings?: () => Promise<void> } } }
+  ).browser;
+  if (firefox?.commands?.openShortcutSettings) {
+    try {
+      await firefox.commands.openShortcutSettings();
+      return;
+    } catch {
+      // フォールバックへ
+    }
+  }
+  // Chrome: chrome:// URL は拡張機能から tabs.create で開ける
+  try {
+    await chrome.tabs.create({ url: "chrome://extensions/shortcuts" });
+  } catch {
+    showStatus(
+      "about:addons の歯車アイコン →「拡張機能のショートカットを管理」から変更してください。",
+      true,
+    );
+  }
 });
 
 async function renderShortcut(): Promise<void> {

@@ -101,7 +101,7 @@ async function openDictionary(word: string): Promise<void> {
     focused: true,
     ...bounds,
   });
-  if (created.id === undefined) return;
+  if (created?.id === undefined) return;
 
   const next: DictState = { id: created.id, openedAt: Date.now() };
   await setState(next);
