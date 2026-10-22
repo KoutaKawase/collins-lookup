@@ -1,7 +1,6 @@
 import type { DismissMessage, LookupMessage } from "./shared";
 
 const MAX_LENGTH = 60; // これより長い選択ではアイコンを出さない
-const SVG_NS = "http://www.w3.org/2000/svg";
 
 let currentWord = "";
 
@@ -22,6 +21,8 @@ style.textContent = `
     border-radius: 50%;
     background: #1f2937;
     color: #fff;
+    font-size: 16px;
+    line-height: 1;
     cursor: pointer;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
   }
@@ -34,25 +35,7 @@ button.type = "button";
 button.title = "Collins で調べる";
 button.setAttribute("aria-label", "Collins で調べる");
 
-const svg = document.createElementNS(SVG_NS, "svg");
-svg.setAttribute("viewBox", "0 0 24 24");
-svg.setAttribute("width", "16");
-svg.setAttribute("height", "16");
-svg.setAttribute("fill", "none");
-svg.setAttribute("stroke", "currentColor");
-svg.setAttribute("stroke-width", "2.5");
-svg.setAttribute("stroke-linecap", "round");
-const circle = document.createElementNS(SVG_NS, "circle");
-circle.setAttribute("cx", "10");
-circle.setAttribute("cy", "10");
-circle.setAttribute("r", "6");
-const handle = document.createElementNS(SVG_NS, "line");
-handle.setAttribute("x1", "15");
-handle.setAttribute("y1", "15");
-handle.setAttribute("x2", "21");
-handle.setAttribute("y2", "21");
-svg.append(circle, handle);
-button.append(svg);
+button.textContent = "📖";
 shadow.append(style, button);
 
 function show(x: number, y: number, word: string): void {
@@ -68,10 +51,10 @@ function hide(): void {
   host.remove();
 }
 
-// 選択確定時(マウスを離した位置の近くにアイコンを表示)
+// 選択確定時(マウスを離した位置の左下にアイコンを表示)
 document.addEventListener("mouseup", (event) => {
   if (event.target === host) return;
-  const x = event.pageX + 8;
+  const x = event.pageX - 8 - 28;
   const y = event.pageY + 12;
   // mouseup 直後は選択が未確定な場合があるため次のタスクで読む
   setTimeout(() => {
