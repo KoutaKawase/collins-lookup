@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Collins Quick Lookup",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "選択した英単語を Collins Dictionary で素早く調べます。",
   "icons": {
     "16": "icons/icon-16.png",
